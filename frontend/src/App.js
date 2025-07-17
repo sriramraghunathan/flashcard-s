@@ -4,7 +4,7 @@ import FolderList from "./components/FolderList";
 import FlashcardForm from "./components/FlashcardForm";
 import FlashcardList from "./components/FlashcardList";
 
-const API = "http://localhost:5000/api";
+const API = "https://flashcard-s.onrender.com/api";
 
 function App() {
   const [folders, setFolders] = useState([]);
