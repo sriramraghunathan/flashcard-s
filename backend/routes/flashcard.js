@@ -30,13 +30,15 @@ router.put("/update/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    await Flashcard.findByIdAndDelete(req.params.id);
+    const deleted = await Flashcard.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ error: "Flashcard not found" });
     res.json({ success: true });
   } catch (err) {
     console.error("Delete error:", err);
     res.status(500).json({ error: "Delete failed" });
   }
 });
+
 
 
 module.exports = router;

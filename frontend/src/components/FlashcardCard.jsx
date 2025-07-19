@@ -6,7 +6,7 @@ const FlashcardCard = ({ card, onEdit, onDelete }) => {
 
   return (
     <div
-      className="relative group w-full h-60 perspective mb-40"
+      className="relative group w-full h-60 perspective"
       onClick={() => setFlipped(!flipped)}
     >
       <div

@@ -7,7 +7,7 @@ import FlashcardCard from "../components/FlashcardCard";
 const API_BASE = "https://flashcard-s.onrender.com/api";
 
 const FlashcardPage = () => {
-  const { id } = useParams(); // folder ID
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [flashcards, setFlashcards] = useState([]);
@@ -92,7 +92,7 @@ const FlashcardPage = () => {
     if (!window.confirm("Are you sure you want to delete this flashcard?"))
       return;
     try {
-await axios.delete(`${API_BASE}/flashcards/delete/${cardId}`);
+      await axios.delete(`${API_BASE}/flashcards/${cardId}`);
       setFlashcards(flashcards.filter((card) => card._id !== cardId));
     } catch (err) {
       console.error("Delete flashcard failed:", err);
@@ -100,12 +100,15 @@ await axios.delete(`${API_BASE}/flashcards/delete/${cardId}`);
   };
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-blue-800">📚 Flashcards</h1>
+    <div className="px-4 py-6 max-w-6xl mx-auto">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-3">
+        <h1 className="text-xl sm:text-2xl font-bold text-blue-800">
+          📚 Flashcards
+        </h1>
         <button
           onClick={() => navigate("/")}
-          className="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
+          className="text-sm bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
         >
           ← Back to Home
         </button>
@@ -128,7 +131,7 @@ await axios.delete(`${API_BASE}/flashcards/delete/${cardId}`);
       />
 
       {/* Flashcard Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {flashcards.map((card) => (
           <FlashcardCard
             key={card._id}
@@ -137,6 +140,18 @@ await axios.delete(`${API_BASE}/flashcards/delete/${cardId}`);
             onDelete={handleDeleteFlashcard}
           />
         ))}
+      </div>
+
+      {/* Back to Top Button */}
+      <div className="text-center mt-16">
+        <a
+          href="#top"
+          className="inline-block p-2 rounded-full bg-blue-500 hover:bg-blue-600 transition"
+        >
+          <span className="material-icons text-white text-4xl">
+            keyboard_arrow_up
+          </span>
+        </a>
       </div>
     </div>
   );
