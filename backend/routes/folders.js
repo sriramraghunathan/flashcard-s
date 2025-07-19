@@ -56,5 +56,19 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete folder" });
   }
 });
+router.put("/:id", async (req, res) => {
+  try {
+    const updated = await Folder.findByIdAndUpdate(
+      req.params.id,
+      { name: req.body.name },
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    console.error("❌ Error renaming folder:", err);
+    res.status(500).json({ error: "Failed to rename folder" });
+  }
+});
+
 
 module.exports = router;

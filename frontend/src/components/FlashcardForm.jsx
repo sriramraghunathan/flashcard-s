@@ -41,13 +41,13 @@ const FlashcardForm = ({
           placeholder="Question"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          className="border p-2 w-full rounded"
+          className="border p-2 w-full rounded "
           required
         />
 
         {/* Question Image Upload */}
         <div className="flex items-center gap-3">
-          <label className="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 rounded cursor-pointer">
+          <label className="bg-indigo-500  hover:bg-indigo-600 text-white px-3 py-2 rounded cursor-pointer">
             Add Question Image
             <input
               type="file"
