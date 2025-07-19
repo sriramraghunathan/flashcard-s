@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Flashcard = require("../models/Flashcard");
 
+
 router.get("/:folderId", async (req, res) => {
   const cards = await Flashcard.find({ folderId: req.params.folderId });
   res.json(cards);
@@ -24,5 +25,6 @@ router.delete("/delete/:id", async (req, res) => {
   await Flashcard.findByIdAndDelete(req.params.id);
   res.json({ success: true });
 });
+
 
 module.exports = router;
