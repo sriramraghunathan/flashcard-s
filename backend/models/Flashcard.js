@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 
 const flashcardSchema = new mongoose.Schema({
-  folderId: String,
   question: String,
-  answer: String,
   questionImage: String,
+  answer: String,
   answerImage: String,
+  folderId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Folder",
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Flashcard", flashcardSchema);
