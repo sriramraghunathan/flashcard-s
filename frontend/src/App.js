@@ -22,6 +22,17 @@ function App() {
     axios.get(`${API}/folders`).then((res) => setFolders(res.data));
   }, []);
 
+  const handleDeleteFolder = async (id) => {
+    await axios.delete(`${API}/folders/${id}`);
+    const updated = folders.filter((f) => f._id !== id);
+    setFolders(updated);
+    if (selectedFolder === id) {
+      setSelectedFolder(null);
+      setFlashcards([]);
+    }
+  };
+
+
   const fetchFlashcards = async (folderId) => {
     const res = await axios.get(`${API}/flashcards/${folderId}`);
     setFlashcards(res.data);
@@ -97,6 +108,7 @@ function App() {
         folderName={folderName}
         setFolderName={setFolderName}
         createFolder={createFolder}
+        onDeleteFolder={handleDeleteFolder}
       />
 
       {selectedFolder && (

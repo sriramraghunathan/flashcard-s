@@ -33,7 +33,9 @@ const FlashcardForm = ({
       <h3 className="text-lg font-bold mb-3 text-blue-800">
         {isEditing ? "✏️ Edit Flashcard" : "➕ Add Flashcard"}
       </h3>
-      <div className="space-y-3">
+
+      <div className="space-y-4">
+        {/* Question Text */}
         <input
           type="text"
           placeholder="Question"
@@ -42,11 +44,28 @@ const FlashcardForm = ({
           className="border p-2 w-full rounded"
           required
         />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleFileChange(e, "question")}
-        />
+
+        {/* Question Image Upload */}
+        <div className="flex items-center gap-3">
+          <label className="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 rounded cursor-pointer">
+            Add Question Image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleFileChange(e, "question")}
+              className="hidden"
+            />
+          </label>
+          {questionImage && (
+            <img
+              src={questionImage}
+              alt="Question preview"
+              className="w-16 h-16 object-cover rounded border"
+            />
+          )}
+        </div>
+
+        {/* Answer Text */}
         <input
           type="text"
           placeholder="Answer"
@@ -55,18 +74,35 @@ const FlashcardForm = ({
           className="border p-2 w-full rounded"
           required
         />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleFileChange(e, "answer")}
-        />
 
+        {/* Answer Image Upload */}
+        <div className="flex items-center gap-3">
+          <label className="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 rounded cursor-pointer">
+            Add Answer Image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleFileChange(e, "answer")}
+              className="hidden"
+            />
+          </label>
+          {answerImage && (
+            <img
+              src={answerImage}
+              alt="Question preview"
+              className="w-16 h-16 object-cover rounded border"
+            />
+          )}
+        </div>
+        <br />
+
+        {/* Buttons */}
         <div className="flex gap-3 mt-3">
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
           >
-            {isEditing ? "Update" : "Add"}
+            {isEditing ? "Update" : "Add Card"}
           </button>
           {isEditing && (
             <button
