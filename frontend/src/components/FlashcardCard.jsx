@@ -6,7 +6,7 @@ const FlashcardCard = ({ card, onEdit, onDelete }) => {
 
   return (
     <div
-      className="relative group w-full h-60 perspective"
+      className="relative group w-full h-60 sm:h-64 md:h-72 lg:h-80 xl:h-96 perspective cursor-pointer"
       onClick={() => setFlipped(!flipped)}
     >
       <div
@@ -15,15 +15,17 @@ const FlashcardCard = ({ card, onEdit, onDelete }) => {
         }`}
       >
         {/* Front */}
-        <div className="absolute w-full h-auto backface-hidden bg-white border rounded p-4  shadow-md">
+        <div className="absolute w-full h-full backface-hidden bg-blue-50 border rounded p-4 sm:p-6 md:p-8 shadow-md overflow-auto">
           <div className="flex justify-between items-start">
-            <h3 className="text-lg font-bold text-blue-600">Question</h3>
+            <h3 className="text-sm sm:text-base md:text-lg font-bold text-blue-600">
+              Question
+            </h3>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setShowMenu(!showMenu);
               }}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-500 hover:text-gray-700 text-xl"
             >
               ⋮
             </button>
@@ -32,30 +34,36 @@ const FlashcardCard = ({ card, onEdit, onDelete }) => {
             <img
               src={card.questionImage}
               alt="Question"
-              className="w-full h-full object-cover rounded"
+              className="w-full h-32 sm:h-40 md:h-48 object-contain rounded mt-2"
             />
           )}
-          <p className="mt-2 text-gray-700">{card.question}</p>
+          <p className="mt-2 text-sm sm:text-base text-gray-700 break-words">
+            {card.question}
+          </p>
         </div>
 
         {/* Back */}
-        <div className="absolute w-full h-auto backface-hidden bg-blue-50 border rounded p-10 shadow-md rotate-y-180">
-          <h3 className="text-lg font-bold text-green-700">Answer</h3>
+        <div className="absolute w-full h-full backface-hidden bg-blue-50 border rounded p-4 sm:p-6 md:p-8 shadow-md rotate-y-180 overflow-auto">
+          <h3 className="text-sm sm:text-base md:text-lg font-bold text-green-700">
+            Answer
+          </h3>
           {card.answerImage && (
             <img
               src={card.answerImage}
               alt="Answer"
-              className="w-full h-full object-cover rounded"
+              className="w-full h-32 sm:h-40 md:h-48 object-contain rounded mt-2"
             />
           )}
-          <p className="mt-2 text-gray-800">{card.answer}</p>
+          <p className="mt-2 text-sm sm:text-base text-gray-800 break-words">
+            {card.answer}
+          </p>
         </div>
       </div>
 
       {/* Edit/Delete Menu */}
       {showMenu && (
         <div
-          className="absolute top-8 right-2 bg-white border rounded shadow-md z-10"
+          className="absolute top-8 right-2 bg-white border rounded shadow-md z-20"
           onClick={(e) => e.stopPropagation()}
         >
           <button
